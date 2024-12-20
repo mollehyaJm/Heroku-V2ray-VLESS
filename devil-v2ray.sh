@@ -32,4 +32,4 @@ EOF
 
 #run v2ray server
 
-v2ray -c /etc/xray/config.json
+v2ray run -c /etc/xray/config.json
