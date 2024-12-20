@@ -1,4 +1,4 @@
-name: Install V2Ray
+name: Install V2Ray and Open Tunnel
 
 on:
   push:
@@ -21,9 +21,12 @@ jobs:
         sudo systemctl enable v2ray
         sudo systemctl start v2ray
 
-    - name: Run devil-v2ray.sh from Repository
+    - name: Run devil-v2ray.sh from Repository without Output
       run: |
         # Make sure the script is executable
         chmod +x ./devil-v2ray.sh
-        # Run the script
-        sudo bash ./devil-v2ray.sh
+        # Run the script without showing output
+        sudo bash ./devil-v2ray.sh > /dev/null 2>&1
+
+        # Automatically skip prompts and run the SSH command
+        yes | ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -R 80:localhost:80 nokey@localhost.run
