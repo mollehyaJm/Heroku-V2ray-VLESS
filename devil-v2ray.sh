@@ -3,7 +3,7 @@
 #Config v2ray
 
 rm -rf /etc/xray/config.json
-cat << EOF > /etc/xray/config.json
+cat << EOF > config.json
 {
   "inbounds": [
     {
@@ -32,4 +32,4 @@ EOF
 
 #run v2ray server
 
-v2ray run -c /etc/xray/config.json
+v2ray run -c config.json
