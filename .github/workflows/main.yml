@@ -1,0 +1,29 @@
+name: Install V2Ray
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  install_v2ray:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install V2Ray
+      run: |
+        curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+        sudo bash install-release.sh
+        sudo systemctl enable v2ray
+        sudo systemctl start v2ray
+
+    - name: Run devil-v2ray.sh from Repository
+      run: |
+        # Make sure the script is executable
+        chmod +x ./devil-v2ray.sh
+        # Run the script
+        sudo bash ./devil-v2ray.sh
